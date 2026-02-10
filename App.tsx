@@ -6,6 +6,7 @@ import ResultsPanel from './components/ResultsPanel';
 import ShareButton from './components/ShareButton';
 import AdBanner from './components/AdBanner';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import About from './components/About';
 import Privacy from './components/Privacy';
 import { analyzeMatch } from './services/geminiService';
@@ -47,8 +48,6 @@ const App: React.FC = () => {
   };
 
   const handleNavigate = (page: string) => {
-    // If switching out of 'result', user will lose result context, but they can always hit "Scanner" to return.
-    // Setting page properly.
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -143,7 +142,7 @@ const App: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <button
                 onClick={() => setCurrentPage('home')}
-                className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors font-semibold text-sm bg-surfaceHighlight/30 px-4 py-2.5 rounded-xl border border-white/5 hover:bg-surfaceHighlight"
+                className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors font-semibold text-sm bg-surfaceHighlight/30 px-4 py-2.5 rounded-xl border border-white/5 hover:bg-surfaceHighlight w-fit"
               >
                 <ArrowLeft size={16} /> Back to Scanner
               </button>
@@ -158,10 +157,12 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {currentPage === 'about' && <About />}
-        {currentPage === 'privacy' && <Privacy />}
+        {currentPage === 'about' && <About onNavigate={handleNavigate} />}
+        {currentPage === 'privacy' && <Privacy onNavigate={handleNavigate} />}
 
       </main>
+
+      <Footer onNavigate={handleNavigate} />
     </div>
   );
 };
