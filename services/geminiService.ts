@@ -11,7 +11,16 @@ export const analyzeMatch = async (resume: InputData, jd: InputData): Promise<An
   }
 
   const ai = new GoogleGenAI({ apiKey: apiKey});
-  
+  try {
+  const res = await analyzeMatch(resume, jd);
+  // ... rest of your code
+} catch (err: any) {
+  if (err.message.includes("503") || err.message.includes("high demand")) {
+    setError("Google's AI is a bit busy right now due to high demand. Please wait 1 minute and click Scan again!");
+  } else {
+    setError("Something went wrong. Please check your connection and try again.");
+  }
+}
   const parts: any[] = [
     { text: "You are an expert technical recruiter and ATS (Applicant Tracking System) simulator. Analyze the provided candidate's Resume against the provided Job Description." }
   ];
