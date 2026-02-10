@@ -3,11 +3,12 @@ import { InputData, AnalysisResult } from "../types";
 
 export const analyzeMatch = async (resume: InputData, jd: InputData): Promise<AnalysisResult> => {
   // Check if API key exists, otherwise throw to be caught by component
-  if (!process.env.API_KEY) {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
     throw new Error("API key is missing. Please ensure process.env.API_KEY is configured.");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: apiKey});
   
   const parts: any[] = [
     { text: "You are an expert technical recruiter and ATS (Applicant Tracking System) simulator. Analyze the provided candidate's Resume against the provided Job Description." }
