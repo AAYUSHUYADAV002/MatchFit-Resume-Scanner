@@ -3,7 +3,9 @@ import { InputData, AnalysisResult } from "../types";
 
 export const analyzeMatch = async (resume: InputData, jd: InputData): Promise<AnalysisResult> => {
   // Check if API key exists, otherwise throw to be caught by component
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY || 
+                 (import.meta as any).env?.VITE_API_KEY ||
+                  process.env.API_KEY;
   if (!apiKey) {
     throw new Error("API key is missing. Please ensure process.env.API_KEY is configured.");
   }
