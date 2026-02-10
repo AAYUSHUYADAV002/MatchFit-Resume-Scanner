@@ -1,0 +1,5 @@
+{
+  "name": " MatchFit - Resume Scanner",
+  "description": "A glassmorphism PWA to analyze resumes against job descriptions using AI.",
+  "requestFramePermissions": []
+}
